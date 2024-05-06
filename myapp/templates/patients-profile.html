@@ -1,0 +1,161 @@
+﻿{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<section class="content home">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <h2>Patient Profile <small class="text-muted">Welcome to Healthify</small></h2>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+
+
+                <button class="btn btn-white btn-icon btn-round d-none d-md-inline-block float-right m-l-10"
+                    type="button">
+                    <i class="zmdi zmdi-edit"></i>
+                </button>
+
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="..\dashboard\index.html"><i class="zmdi zmdi-home"></i>
+                            Healthify</a></li>
+                    <li class="breadcrumb-item">Patients</li>
+                    <li class="breadcrumb-item active">Patient Profile</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row clearfix profile-page">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="card member-card">
+                    <div class="header l-coral">
+                        <h4 class="m-t-10">{{appointment.user.f_name}}&nbsp{{appointment.user.l_name}}</h4>
+                    </div>
+                    <div class="member-img">
+                        <img src="{{appointment.user.picture.url}}" style="height: 200px; width: 200px;" class="rounded-circle"
+                                alt="profile-image">
+                    </div>
+                    <div class="body">
+                        <hr>
+                        <strong>Email ID</strong>
+                        <p>{{appointment.email}}</p>
+                        <strong>Phone</strong>
+                        <p>{{appointment.phone}}</p>
+                        <strong>Gender</strong>
+                        <p>{{appointment.gender}}</p>
+                        <strong>Birth Date</strong>
+                        <p>{{appointment.dob}}</p>
+                        <hr>
+                        <strong>Address</strong>
+                        <address>{{appointment.patient_info.address}}</address>
+
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    {% comment %} <div class="header">
+                        <h2><strong>General</strong> Report</h2>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="body">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div>Blood Pressure</div>
+                                <div class="progress m-b-20">
+                                    <div class="progress-bar progress-bar-success progress-bar-striped"
+                                        role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: 40%"> <span class="sr-only">40% Complete (success)</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>Heart Beat</div>
+                                <div class="progress m-b-20">
+                                    <div class="progress-bar progress-bar-info progress-bar-striped"
+                                        role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: 20%"> <span class="sr-only">20% Complete</span> </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>Haemoglobin</div>
+                                <div class="progress m-b-20">
+                                    <div class="progress-bar progress-bar-warning progress-bar-striped"
+                                        role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: 60%"> <span class="sr-only">60% Complete (warning)</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>Sugar</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger progress-bar-striped"
+                                        role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: 80%"> <span class="sr-only">80% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="body">
+                        {{appointment.info}}
+                    </div>
+                </div>
+                <div class="card" id="timeline">
+                    <div class="body">
+                        <div class="timeline-body">
+                            <div class="timeline m-border">
+                                <table class="table m-b-0 table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Media</th>
+                                            <th>Patients ID</th>
+                                            <th>Name</th>
+                                            <th>Age</th>
+                                            <th>Visit</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    {% for i in a %}
+                                        {% if i.doctor_info.user_id.f_name == user.f_name %}
+                                    
+
+                                            <tr>
+                                                <td><span class="list-icon"><img class="patients-img"
+                                                            src="{{i.user.picture.url}}" alt="" style="height: 100px; width:100px;"></span></td>
+                                                <td><span class="list-name">{{i.user.pk}}</span></td>
+                                                <td>{{i.user.f_name}}</td>
+                                                <td>{{i.age}}</td>
+                                            
+                                                <td>{{i.appointment_date}}</td>                      
+                                                {% if i.appointment_status_pandding == True %}
+                                                <td>
+                                                    <a href="{% url "approved" i.pk %}"><button class="badge badge-success">Approved</button></a>
+                                                    <a href="{% url "rejected" i.pk %}"><button class="badge badge-danger">Cancle</button></a>
+                                                </td>
+                                                {% elif i.appointment_status_approved == True %}
+                                                <td><span class="badge badge-info">approved</span> </td>
+    
+                                                {% elif i.appointment_status_cancle == True %}
+                                                <td><span class="badge badge-info">Cancer</span></td>
+                                                {% endif %}
+                                         
+                                            </tr>
+                                            
+                                    
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

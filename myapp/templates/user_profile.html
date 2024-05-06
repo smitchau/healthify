@@ -1,0 +1,100 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+    <section class="content home">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h2>Profile <small class="text-muted">Welcome to Healthify</small></h2>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+
+
+                    <button class="btn btn-white btn-icon btn-round d-none d-md-inline-block float-right m-l-10"
+                        type="button">
+                        <i class="zmdi zmdi-edit"></i>
+                    </button>
+
+                    <ul class="breadcrumb float-md-right">
+                        <li class="breadcrumb-item"><a href="..\dashboard\index.html"><i class="zmdi zmdi-home"></i>
+                                Healthify</a></li>
+                        <li class="breadcrumb-item">Patient</li>
+                        <li class="breadcrumb-item active">Profile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+
+            <div class="row clearfix profile-page">
+                <div class="col-lg-4 col-md-12">
+                    <div class="card profile-header">
+                        <div class="body text-center">
+                            <div class="profile-image"> <img src="{{request.session.picture}}" alt="" style="height: 200px; width: 200px;"> </div>
+                            <div>
+                                <h4 class="m-b-0"><strong>{{user.f_name}}</strong><br> {{user.l_name}}</h4>
+                                
+                            </div>
+                            <div>
+                                <form action="{% url 'Change_Picture' %}" method="post" enctype="multipart/form-data" style="display: inline-block;">
+                                    {% csrf_token %}
+                                    <label for="fileInput" class="btn btn-primary btn-round">
+                                        Change Picture
+                                        <input type="file" id="fileInput" name="picture" style="display: none;">
+                                    </label>
+                                    <button type="submit" id="submitButton" style="display: none;">Submit</button>
+                                </form>
+                                <a href="{% url "update_profile" %}" style="display: inline-block; margin-left: 10px;">
+                                    <button class="btn btn-primary btn-round">Update Profile</button>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                   
+                 
+                </div>
+                <div class="col-lg-8 col-md-12">
+                    <div class="card">
+                     
+                        <div class="tab-content">
+                            <div class="tab-pane body active" id="about">
+                                <ul class="list-unstyled">
+                                    
+                                    <li>
+                                        <p style="font-size: large;"><strong>Email:</strong> {{user.email}}</p style="font-size: large;">
+                                    </li>
+                                    {% if patient_info %}
+                                    <li>
+                                        <p style="font-size: large;"><strong>Contact:</strong> {{patient_info.contact}}</p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: large;"><strong>Country:</strong> {{patient_info.country}}</p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: large;"><strong>Residency:</strong> {{patient_info.city}}</p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: large;"><strong>Address:</strong> {{patient_info.address}}</p>
+                                    </li>
+                                    {% endif %}
+                                    
+                                </ul>
+                                
+                            </div>
+                           
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function() {
+            document.getElementById('submitButton').click();
+        });
+    </script>
+    
+{% endblock %}

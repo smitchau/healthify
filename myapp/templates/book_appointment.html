@@ -1,0 +1,202 @@
+﻿{% extends 'header.html' %}
+{% block content %}
+<section class="content home">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <h2>Book Appointment <small class="text-muted">Welcome to Healthify</small></h2>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+
+
+
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="..\dashboard\index.html"><i class="zmdi zmdi-home"></i>
+                            Healthify</a></li>
+                    <li class="breadcrumb-item">Appointment</li>
+                    <li class="breadcrumb-item active">Book Appointment</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Book</strong> Appointment<small>Description text here...</small> </h2>
+                        <ul class="header-dropdown">
+                            <li class="remove">
+                                <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <form action="{% url "book_appointment" pk=doctor.pk %}" method="post">
+                        {% csrf_token %}
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <input type="text" name="fname" class="form-control" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="number" name="age" class="form-control" placeholder="Enter your age">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <h6>Enter your Birth Date:</h6>
+                                    <input type="date" name="dob" class="form-control" placeholder="Date of Birth">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="gender" class="form-control show-tick">
+                                    <option value="">- Gender -</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            {% if doctor_info.speciality == 'Cardiologist' %}
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="service" class="form-control show-tick">
+                                    <option value="">- Service -</option>
+                                    <option value="heart Problem">heart Problem</option>
+                                    <option value="Diagnostic Testing">Diagnostic Testing</option>
+                                </select>
+                            </div>
+    
+                            {% elif doctor_info.speciality == 'Nephrologiest' %}
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="service" class="form-control show-tick">
+                                    <option value="">- Service -</option>
+                                    <option value="kidneys Problem">kidneys Problem</option>
+                                    <option value="Treatment of Acute Kidney Injury">Treatment of Acute Kidney Injury</option>
+                                </select>
+                            </div>
+
+                            {% elif doctor_info.speciality == 'Pulmonologist' %}
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="service" class="form-control show-tick">
+                                    <option value="">- Service -</option>
+                                    <option value="Lung Problem">Lung Problem</option>
+                                    <option value="Sleep Medicine Services">Sleep Medicine Services</option>
+                                    <option value="Respiratory Disease Diagnosis">Respiratory Disease Diagnosis</option>
+                                </select>
+                            </div>
+
+                            {% elif doctor_info.speciality == 'Ophthalmologist' %}
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="service" class="form-control show-tick">
+                                    <option value="">- Service -</option>
+                                    <option value="Retina and Vitreous Services">Retina and Vitreous Services</option>
+                                    <option value="Eye Problem">Eye Problem</option>
+                                    <option value="Cornea and External Disease Services">Cornea and External Disease Services</option>
+                                </select>
+                            </div>
+
+                            {% elif doctor_info.speciality == 'Neurologist' %}
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="service" class="form-control show-tick">
+                                    <option value="">- Service -</option>
+                                    <option value="Epilepsy Management and Seizure Disorders">Epilepsy Management and Seizure Disorders</option>
+                                    <option value="Stroke Care and Management">Stroke Care and Management</option>
+                                    <option value="brain Problem">brain Problem</option>
+                                </select>
+                            </div>
+
+                            {% elif doctor_info.speciality == 'Rheumatologist' %}
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="service" class="form-control show-tick">
+                                    <option value="">- Service -</option>
+                                    <option value="Management of Autoimmune Diseases">Management of Autoimmune Diseases</option>
+                                    <option value="Management of Musculoskeletal Conditions">Management of Musculoskeletal Conditions</option>
+                                </select>
+                            </div>
+
+                            {% elif doctor_info.speciality == 'Dermatologist' %}
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="service" class="form-control show-tick">
+                                    <option value="">- Service -</option>
+                                    <option value="Diagnosis and Treatment of Skin Conditions">Diagnosis and Treatment of Skin Conditions</option>
+                                    <option value="Cosmetic Dermatology Services">Cosmetic Dermatology Services</option>
+                                </select>
+                            </div>
+
+                            {% elif doctor_info.speciality == 'Hematologist' %}
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="service" class="form-control show-tick">
+                                    <option value="">- Service -</option>
+                                    <option value="Management of Blood Disorders">Management of Blood Disorders</option>
+                                    <option value="Management of Hematologic Malignancies">Management of Hematologic Malignancies</option>
+                                </select>
+                            </div>
+                           
+                            {% elif doctor_info.speciality == 'Somnologist' %}
+                            <div class="col-sm-3">
+                                <br>
+                                <select name="service" class="form-control show-tick">
+                                    <option value="">- Service -</option>
+                                    <option value="Diagnosis and Management of Sleep Disorders">Diagnosis and Management of Sleep Disorders</option>
+                                    <option value="Treatment and Management of Sleep Disorders">Treatment and Management of Sleep Disorders</option>
+                                </select>
+                            </div>
+
+                            {% endif %}
+                            <div class="col-sm-3">
+                                <h6>Please choose date & time...</h6>
+                                <div class="input-group">
+                                    <input type="datetime-local" name="appoinment_date" class="form-control datetimepicker"
+                                        placeholder="Please choose date & time...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" name="email" class="form-control" placeholder="Enter Your Email">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" name="phone" class="form-control" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <textarea name="info" rows="4" class="form-control no-resize"
+                                        placeholder="Please type what you want..."></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary btn-round">Submit</button>
+                                <button type="submit" class="btn btn-default btn-round btn-simple">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

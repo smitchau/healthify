@@ -1,0 +1,107 @@
+﻿{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<section class="content home">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <h2>All Patients <small class="text-muted">Welcome to Healthify</small></h2>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+
+                <button class="btn btn-white btn-icon btn-round d-none d-md-inline-block float-right m-l-10"
+                    type="button">
+                    <i class="zmdi zmdi-plus"></i>
+                </button>
+
+
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="..\dashboard\index.html"><i class="zmdi zmdi-home"></i>
+                            Healthify</a></li>
+                    <li class="breadcrumb-item">Patients</li>
+                    <li class="breadcrumb-item active">All Patients</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card patients-list">
+                    <div class="header">
+                        <h2><strong>Patients</strong> List</h2>
+                    </div>
+                    <div class="body">
+                        
+                        <!-- Tab panes -->
+                        <div class="tab-content m-t-10">
+                            <div class="tab-pane table-responsive active" id="All">
+                                <table class="table m-b-0 table-hover" style="text-align: center;">
+                                    <thead>
+                                        <tr>
+                                            <th>Media</th>
+                                            <th>Patients ID</th>
+                                            <th>Name</th>
+                                            <th>Age</th>
+                                            <th>Address</th>
+                                            <th>Number</th>
+                                            <th>Doctor Name</th>
+                                            <th>Visit</th>
+                                            <th>Appointment id</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    {% if appointment %}
+                                    <tbody>
+                                        {% for i in appointment %}
+                                        <tr>
+                                            <td><span class="list-icon"><img class="patients-img"
+                                                        src="{{i.user.picture.url}}" alt=""></span></td>
+                                            <td><span class="list-name">{{i.user.pk}}</span></td>
+                                            <td>{{i.user.f_name}}</td>
+                                            <td>{{i.age}}</td>
+                                            <td>{{i.patient_info.address}}</td>
+                                            <td>{{i.phone}}</td>
+                                            <td>dr.{{i.doctor_info.user_id.f_name}}</td>
+                                            <td>{{i.appointment_date}}</td>  
+                                            <td><span class="list-name">{{i.pk}}</span></td>                    
+                                            {% if i.appointment_status_pandding == True %}
+                                            <td><span class="badge badge-info">Pandding</span> </td>
+
+                                            {% elif i.appointment_status_approved == True %}
+                                            <td><span class="badge badge-info">approved</span> </td>
+
+                                            {% elif i.appointment_status_cancle == True %}
+                                            <td><span class="badge badge-info">Cancer</span></td>
+                                            {% endif %}
+                                     
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    {% else %}
+                                    <tr>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        
+                                    </tr>
+                                    {% endif %}
+                                </table>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

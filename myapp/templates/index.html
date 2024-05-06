@@ -1,0 +1,229 @@
+{% extends 'header.html' %}
+{% block content %}
+    <section class="content home">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h2>Dashboard <small class="text-muted">Welcome to Healthify</small></h2>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+                <ul class="breadcrumb float-md-right">
+                        <li class="breadcrumb-item"><a href="{% url "home" %}"><i class="zmdi zmdi-home"></i> Healthify</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="body">
+                            <h3 class="number count-to m-b-0" data-from="0" data-to="{{c}}" data-speed="1500"
+                                data-fresh-interval="700">{{c}}<i class="zmdi zmdi-trending-up float-right"></i></h3>
+                            <p class="text-muted">All Doctors</p>
+                            <div class="progress">
+                                <div class="progress-bar l-blush" role="progressbar" aria-valuenow="{{c}}"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: {{c}}%;"></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="body">
+                            <h3 class="number count-to m-b-0" data-from="0" data-to="{{a}}" data-speed="1500"
+                                data-fresh-interval="1000">{{a}} <i class="zmdi zmdi-trending-up float-right"></i></h3>
+                            <p class="text-muted">Your Patients</p>
+                            <div class="progress">
+                                <div class="progress-bar l-green" role="progressbar" aria-valuenow="{{a}}"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: {{a}}%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="body">
+                            <h3 class="number count-to m-b-0" data-from="0" data-to="{{b}}" data-speed="1500"
+                                data-fresh-interval="1000">{{b}} <i class="zmdi zmdi-trending-up float-right"></i></h3>
+                            <p class="text-muted">All Patients 
+                            <div class="progress">
+                                <div class="progress-bar l-parpl" role="progressbar" aria-valuenow="{{b}}"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: {{b}}%;"></div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card visitors-map">
+                            <div class="header">
+                                <h2><strong>Patients</strong> Location </h2>
+                               
+                            </div>
+                            <div class="body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <div id="world-map-markers" style="height:280px;"></div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="body">
+                                            <ul class="row location_list list-unstyled">
+                                                <li class="col-lg-4 col-md-4 col-6">
+                                                    <div class="body xl-turquoise">
+                                                        <i class="zmdi zmdi-pin"></i>
+                                                        <h4 class="number count-to" data-from="0" data-to="{{America}}"
+                                                            data-speed="2500" data-fresh-interval="700">{{America}}</h4>
+                                                        <span>America</span>
+                                                    </div>
+                                                </li>
+                                                <li class="col-lg-4 col-md-4 col-6">
+                                                    <div class="body xl-khaki">
+                                                        <i class="zmdi zmdi-pin"></i>
+                                                        <h4 class="number count-to" data-from="0" data-to="{{Australia}}"
+                                                            data-speed="2500" data-fresh-interval="700">{{Australia}}</h4>
+                                                        <span>Australia</span>
+                                                    </div>
+                                                </li>
+                                                <li class="col-lg-4 col-md-4 col-6">
+                                                    <div class="body xl-parpl">
+                                                        <i class="zmdi zmdi-pin"></i>
+                                                        <h4 class="number count-to" data-from="0" data-to="{{Canada}}"
+                                                            data-speed="2500" data-fresh-interval="700">{{Canada}}</h4>
+                                                        <span>Canada</span>
+                                                    </div>
+                                                </li>
+                                                <li class="col-lg-4 col-md-4 col-6">
+                                                    <div class="body xl-salmon">
+                                                        <i class="zmdi zmdi-pin"></i>
+                                                        <h4 class="number count-to" data-from="0" data-to="{{India}}"
+                                                            data-speed="2500" data-fresh-interval="700">{{India}}</h4>
+                                                        <span>India</span>
+                                                    </div>
+                                                </li>
+                                                <li class="col-lg-4 col-md-4 col-6">
+                                                    <div class="body xl-blue">
+                                                        <i class="zmdi zmdi-pin"></i>
+                                                        <h4 class="number count-to" data-from="0" data-to="{{UK}}"
+                                                            data-speed="2500" data-fresh-interval="700">{{UK}}</h4>
+                                                        <span>UK</span>
+                                                    </div>
+                                                </li>
+                                                <li class="col-lg-4 col-md-4 col-6">
+                                                    <div class="body xl-slategray">
+                                                        <i class="zmdi zmdi-pin"></i>
+                                                        <h4 class="number count-to" data-from="0" data-to="{{Other}}"
+                                                            data-speed="2500" data-fresh-interval="700">{{Other}}</h4>
+                                                        <span>Other</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% comment %} <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="sparkline m-b-10" data-type="bar" data-width="97%" data-height="38px"
+                                data-bar-width="2" data-bar-spacing="6" data-bar-color="#555555">
+                                2,8,5,3,1,7,9,5,6,4,2,3,1,2,8,5,3,1,7,9,5,6,4,2,3,1</div>
+                            <h6 class="text-center m-b-15">Total New Patient</h6>
+                            <div id="world-map-markers2" style="height:125px;"></div>
+                            <div class="table-responsive m-t-20">
+                                <table class="table table-striped m-b-0">
+                                    <thead>
+                                        <tr>
+                                            <th>City</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>New York</td>
+                                            <td>215<i class="zmdi zmdi-trending-up m-l-10"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Los Angeles</td>
+                                            <td>189<i class="zmdi zmdi-trending-up m-l-10"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Chicago</td>
+                                            <td>408<i class="zmdi zmdi-trending-down m-l-10"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Houston</td>
+                                            <td>78<i class="zmdi zmdi-trending-down m-l-10"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phoenix</td>
+                                            <td>148<i class="zmdi zmdi-trending-up m-l-10"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>San Diego</td>
+                                            <td>102<i class="zmdi zmdi-trending-down m-l-10"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+            <div class="card patient_list">
+                <div class="header">
+                    <h2><strong>New</strong> Patient List</h2>
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-striped m-b-0" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>patient id</th>
+                                    <th>media</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Diseases</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                {% for i in appointment %}
+                                {% if i.appointment_status_pandding == True %}
+                                <tr>
+                                    <td>{{i.user.pk}}</td>
+                                    <td><img src="{{i.user.picture.url}}" alt="Avatar"
+                                            class="rounded-circle"></td>
+                                    <td>{{i.user.f_name}}</td>
+                                    <td>{{i.patient_info.address}}</td>
+                                    {% if i.appointment_status_pandding == True %}
+                                            <td>
+                                                <a href="{% url "approved" i.pk %}"><button class="badge badge-success">Approved</button></a>
+                                                <a href="{% url "rejected" i.pk %}"><button class="badge badge-danger">Cancle</button></a>
+                                            </td>
+                                            {% elif i.appointment_status_approved == True %}
+                                            <td><span class="badge badge-info">approved</span> </td>
+
+                                            {% elif i.appointment_status_cancle == True %}
+                                            <td><span class="badge badge-info">Cancer</span></td>
+                                            {% endif %}
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+{% endblock %}
