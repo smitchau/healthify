@@ -117,71 +117,77 @@ def signup(request):
 def home(request):
     if 'email' in request.session:
         user = User.objects.get(email = request.session['email'])
-        doctor_info = Doctor_info.objects.get(user_id = user)
-        appointment = Appointment.objects.filter(doctor_info = doctor_info)
-        print("===============>",appointment)
-        d = User.objects.all()
-        patient_info = Patient_info.objects.all()
-        America = 0
-        India = 0
-        Australia = 0
-        Canada = 0
-        UK = 0
-        Other = 0
-    
-        for i in patient_info:
-            if i.country == 'india':
-                India = India + 1
-                print("=========>india",India)
-                
-            elif i.country == 'America':
-                America = America + 1
-                
-            elif i.country == 'Australia':
-                Australia = Australia + 1
-                
-            elif i.country == 'Canada':
-                Canada = Canada + 1
-                
-            elif i.country == 'UK':
-                UK = UK + 1
-                
-            elif i.country == 'Other':
-                Other = Other + 1
-                
-            #print(i.user_id.f_name)
-        print("============>d",d)
-        #all patient
-        b = 0
-        for i in patient_info:
-                b = b + 1
-        #Your patient
-        a = 0
-    
-        print("Your patient")
+        print("======",user)
         try:
-            list = []
-            for i in appointment:
-                if i.user.f_name not in list:
-                    list.append(i.user.f_name)
-            print('list',list)
-            for i in list:
-                a = a + 1
-            print(a)
+            doctor_info = Doctor_info.objects.get(user_id = user)
+            print("=====",doctor_info)
+            appointment = Appointment.objects.filter(doctor_info = doctor_info)
+            print("===============>",appointment)
+            d = User.objects.all()
+            patient_info = Patient_info.objects.all()
+            America = 0
+            India = 0
+            Australia = 0
+            Canada = 0
+            UK = 0
+            Other = 0
+        
+            for i in patient_info:
+                if i.country == 'india':
+                    India = India + 1
+                    print("=========>india",India)
+                    
+                elif i.country == 'America':
+                    America = America + 1
+                    
+                elif i.country == 'Australia':
+                    Australia = Australia + 1
+                    
+                elif i.country == 'Canada':
+                    Canada = Canada + 1
+                    
+                elif i.country == 'UK':
+                    UK = UK + 1
+                    
+                elif i.country == 'Other':
+                    Other = Other + 1
+                    
+                #print(i.user_id.f_name)
+            print("============>d",d)
+            #all patient
+            b = 0
+            for i in patient_info:
+                    b = b + 1
+            #Your patient
+            a = 0
+        
+            print("Your patient")
+            try:
+                list = []
+                for i in appointment:
+                    if i.user.f_name not in list:
+                        list.append(i.user.f_name)
+                print('list',list)
+                for i in list:
+                    a = a + 1
+                print(a)
+            except Exception as e:
+                print(e)
+                
+            #Total Doctor
+            if user.role == "doctor":
+                u = User.objects.all()
+                c = 0
+                for i in u:
+                    if i.role == 'doctor':
+                        c = c + 1
+                return render(request,"index.html",{'c':c,'a':a,'b':b,'appointment':appointment,'India':India,'America':America,'Australia':Australia,'Canada':Canada,'UK':UK,'Other':Other})
+            else:    
+                user = User.objects.all()  
+                return render(request, "doctors.html", {"user": user})
         except Exception as e:
             print(e)
-            
-        #Total Doctor
-        if user.role == "doctor":
-            u = User.objects.all()
-            c = 0
-            for i in u:
-                if i.role == 'doctor':
-                    c = c + 1
-            return render(request,"index.html",{'c':c,'a':a,'b':b,'appointment':appointment,'India':India,'America':America,'Australia':Australia,'Canada':Canada,'UK':UK,'Other':Other})
-        else:    
-            user = User.objects.all()  
-            return render(request, "doctors.html", {"user": user})
+            return render(request,"index.html")    
     else:
         return redirect("login")
 
@@ -235,11 +241,10 @@ def book_appointment(request,pk):
 
 def all_patients(request):
     if 'email' in request.session:
-        user = User.objects.get(email = request.session['email'])
-        doctor = Doctor_info.objects.get(user_id = user)
-        print("doctor",doctor)
-        
+        user = User.objects.get(email = request.session['email'])    
         try:
+            doctor = Doctor_info.objects.get(user_id = user)
+            print("doctor",doctor)
             appointment = Appointment.objects.filter(doctor_info = doctor)
             print("====",appointment)
             
